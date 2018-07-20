@@ -1,0 +1,10 @@
+# This file contains additional build requirements that did not get
+# picked up automatically. One name per line, no whitespace.
+buildreq-kde
+kjobwidgets-dev
+solid-dev
+kio-dev
+kcompletion-dev
+kcrash-dev
+kservice-dev
+kitemviews-dev
