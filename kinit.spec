@@ -6,7 +6,7 @@
 #
 Name     : kinit
 Version  : 5.50.0
-Release  : 3
+Release  : 4
 URL      : https://download.kde.org/stable/frameworks/5.50/kinit-5.50.0.tar.xz
 Source0  : https://download.kde.org/stable/frameworks/5.50/kinit-5.50.0.tar.xz
 Source99 : https://download.kde.org/stable/frameworks/5.50/kinit-5.50.0.tar.xz.sig
@@ -20,12 +20,20 @@ Requires: kinit-locales
 Requires: kinit-man
 BuildRequires : buildreq-cmake
 BuildRequires : buildreq-kde
+BuildRequires : kbookmarks-dev
+BuildRequires : kcodecs-dev
 BuildRequires : kcompletion-dev
 BuildRequires : kcrash-dev
+BuildRequires : kdoctools
+BuildRequires : kdoctools-dev
+BuildRequires : ki18n-dev
 BuildRequires : kio-dev
 BuildRequires : kitemviews-dev
 BuildRequires : kjobwidgets-dev
 BuildRequires : kservice-dev
+BuildRequires : kwidgetsaddons-dev
+BuildRequires : kwindowsystem-dev
+BuildRequires : kxmlgui-dev
 BuildRequires : libX11-dev libICE-dev libSM-dev libXau-dev libXcomposite-dev libXcursor-dev libXdamage-dev libXdmcp-dev libXext-dev libXfixes-dev libXft-dev libXi-dev libXinerama-dev libXi-dev libXmu-dev libXpm-dev libXrandr-dev libXrender-dev libXres-dev libXScrnSaver-dev libXt-dev libXtst-dev libXv-dev libXxf86misc-dev libXxf86vm-dev
 BuildRequires : libcap-dev
 BuildRequires : qtbase-dev qtbase-extras mesa-dev
@@ -98,7 +106,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1536429023
+export SOURCE_DATE_EPOCH=1536433796
 mkdir clr-build
 pushd clr-build
 %cmake ..
@@ -106,7 +114,7 @@ make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1536429023
+export SOURCE_DATE_EPOCH=1536433796
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/doc/kinit
 cp COPYING.LGPL-2 %{buildroot}/usr/share/doc/kinit/COPYING.LGPL-2
