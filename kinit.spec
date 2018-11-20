@@ -6,7 +6,7 @@
 #
 Name     : kinit
 Version  : 5.52.0
-Release  : 6
+Release  : 7
 URL      : https://download.kde.org/stable/frameworks/5.52/kinit-5.52.0.tar.xz
 Source0  : https://download.kde.org/stable/frameworks/5.52/kinit-5.52.0.tar.xz
 Source99 : https://download.kde.org/stable/frameworks/5.52/kinit-5.52.0.tar.xz.sig
@@ -21,12 +21,20 @@ Requires: kinit-man = %{version}-%{release}
 BuildRequires : buildreq-cmake
 BuildRequires : buildreq-kde
 BuildRequires : extra-cmake-modules pkgconfig(xcb) xcb-util-cursor-dev xcb-util-image-dev xcb-util-keysyms-dev xcb-util-renderutil-dev xcb-util-wm-dev xcb-util-dev
+BuildRequires : kbookmarks-dev
+BuildRequires : kcodecs-dev
 BuildRequires : kcompletion-dev
 BuildRequires : kcrash-dev
+BuildRequires : kdoctools
+BuildRequires : kdoctools-dev
+BuildRequires : ki18n-dev
 BuildRequires : kio-dev
 BuildRequires : kitemviews-dev
 BuildRequires : kjobwidgets-dev
 BuildRequires : kservice-dev
+BuildRequires : kwidgetsaddons-dev
+BuildRequires : kwindowsystem-dev
+BuildRequires : kxmlgui-dev
 BuildRequires : libX11-dev libICE-dev libSM-dev libXau-dev libXcomposite-dev libXcursor-dev libXdamage-dev libXdmcp-dev libXext-dev libXfixes-dev libXft-dev libXi-dev libXinerama-dev libXi-dev libXmu-dev libXpm-dev libXrandr-dev libXrender-dev libXres-dev libXScrnSaver-dev libXt-dev libXtst-dev libXv-dev libXxf86misc-dev libXxf86vm-dev
 BuildRequires : libcap-dev
 BuildRequires : qtbase-dev mesa-dev
@@ -36,14 +44,6 @@ BuildRequires : solid-dev
 # KInit
 Helper library to speed up start of applications on KDE workspaces
 ## Introduction
-
-%package abi
-Summary: abi components for the kinit package.
-Group: Default
-
-%description abi
-abi components for the kinit package.
-
 
 %package bin
 Summary: bin components for the kinit package.
@@ -107,7 +107,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1541878896
+export SOURCE_DATE_EPOCH=1542742398
 mkdir -p clr-build
 pushd clr-build
 %cmake ..
@@ -115,7 +115,7 @@ make  %{?_smp_mflags} VERBOSE=1
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1541878896
+export SOURCE_DATE_EPOCH=1542742398
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/kinit
 cp COPYING.LGPL-2 %{buildroot}/usr/share/package-licenses/kinit/COPYING.LGPL-2
@@ -130,10 +130,6 @@ popd
 /usr/lib64/libexec/kf5/klauncher
 /usr/lib64/libexec/kf5/start_kdeinit
 /usr/lib64/libexec/kf5/start_kdeinit_wrapper
-
-%files abi
-%defattr(-,root,root,-)
-/usr/share/abi/libkdeinit5_klauncher.so.abi
 
 %files bin
 %defattr(-,root,root,-)
