@@ -5,37 +5,28 @@
 # Source0 file verified with key 0x58D0EE648A48B3BB (faure@kde.org)
 #
 Name     : kinit
-Version  : 5.53.0
-Release  : 10
-URL      : https://download.kde.org/stable/frameworks/5.53/kinit-5.53.0.tar.xz
-Source0  : https://download.kde.org/stable/frameworks/5.53/kinit-5.53.0.tar.xz
-Source99 : https://download.kde.org/stable/frameworks/5.53/kinit-5.53.0.tar.xz.sig
-Summary  : No detailed summary available
+Version  : 5.54.0
+Release  : 11
+URL      : https://download.kde.org/stable/frameworks/5.54/kinit-5.54.0.tar.xz
+Source0  : https://download.kde.org/stable/frameworks/5.54/kinit-5.54.0.tar.xz
+Source99 : https://download.kde.org/stable/frameworks/5.54/kinit-5.54.0.tar.xz.sig
+Summary  : Process launcher to speed up launching KDE applications
 Group    : Development/Tools
 License  : LGPL-2.0 LGPL-2.1
 Requires: kinit-bin = %{version}-%{release}
 Requires: kinit-data = %{version}-%{release}
-Requires: kinit-lib = %{version}-%{release}
 Requires: kinit-license = %{version}-%{release}
 Requires: kinit-locales = %{version}-%{release}
 Requires: kinit-man = %{version}-%{release}
 BuildRequires : buildreq-cmake
 BuildRequires : buildreq-kde
 BuildRequires : extra-cmake-modules pkgconfig(xcb) xcb-util-cursor-dev xcb-util-image-dev xcb-util-keysyms-dev xcb-util-renderutil-dev xcb-util-wm-dev xcb-util-dev
-BuildRequires : kbookmarks-dev
-BuildRequires : kcodecs-dev
 BuildRequires : kcompletion-dev
 BuildRequires : kcrash-dev
-BuildRequires : kdoctools
-BuildRequires : kdoctools-dev
-BuildRequires : ki18n-dev
 BuildRequires : kio-dev
 BuildRequires : kitemviews-dev
 BuildRequires : kjobwidgets-dev
 BuildRequires : kservice-dev
-BuildRequires : kwidgetsaddons-dev
-BuildRequires : kwindowsystem-dev
-BuildRequires : kxmlgui-dev
 BuildRequires : libX11-dev libICE-dev libSM-dev libXau-dev libXcomposite-dev libXcursor-dev libXdamage-dev libXdmcp-dev libXext-dev libXfixes-dev libXft-dev libXi-dev libXinerama-dev libXi-dev libXmu-dev libXpm-dev libXrandr-dev libXrender-dev libXres-dev libXScrnSaver-dev libXt-dev libXtst-dev libXv-dev libXxf86misc-dev libXxf86vm-dev
 BuildRequires : libcap-dev
 BuildRequires : qtbase-dev mesa-dev
@@ -68,23 +59,12 @@ data components for the kinit package.
 %package dev
 Summary: dev components for the kinit package.
 Group: Development
-Requires: kinit-lib = %{version}-%{release}
 Requires: kinit-bin = %{version}-%{release}
 Requires: kinit-data = %{version}-%{release}
 Provides: kinit-devel = %{version}-%{release}
 
 %description dev
 dev components for the kinit package.
-
-
-%package lib
-Summary: lib components for the kinit package.
-Group: Libraries
-Requires: kinit-data = %{version}-%{release}
-Requires: kinit-license = %{version}-%{release}
-
-%description lib
-lib components for the kinit package.
 
 
 %package license
@@ -112,22 +92,22 @@ man components for the kinit package.
 
 
 %prep
-%setup -q -n kinit-5.53.0
+%setup -q -n kinit-5.54.0
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1544547508
+export SOURCE_DATE_EPOCH=1547331455
 mkdir -p clr-build
 pushd clr-build
 %cmake ..
-make  %{?_smp_mflags} VERBOSE=1
+make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1544547508
+export SOURCE_DATE_EPOCH=1547331455
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/kinit
 cp COPYING.LGPL-2 %{buildroot}/usr/share/package-licenses/kinit/COPYING.LGPL-2
@@ -162,9 +142,6 @@ popd
 /usr/lib64/cmake/KF5Init/KF5InitConfigVersion.cmake
 /usr/lib64/cmake/KF5Init/KF5InitMacros.cmake
 /usr/lib64/cmake/KF5Init/kde5init_dummy.cpp.in
-
-%files lib
-%defattr(-,root,root,-)
 /usr/lib64/libkdeinit5_klauncher.so
 
 %files license
