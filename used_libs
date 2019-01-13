@@ -12,4 +12,3 @@ libQt5Gui.so.5
 libX11.so.6
 libc.so.6
 libstdc++.so.6
-libxcb.so.1
