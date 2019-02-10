@@ -1,5 +1,5 @@
 PKG_NAME := kinit
-URL = https://download.kde.org/stable/frameworks/5.54/kinit-5.54.0.tar.xz
+URL = https://download.kde.org/stable/frameworks/5.55/kinit-5.55.0.tar.xz
 ARCHIVES = 
 
 include ../common/Makefile.common
