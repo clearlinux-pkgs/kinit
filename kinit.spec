@@ -5,12 +5,12 @@
 # Source0 file verified with key 0x58D0EE648A48B3BB (faure@kde.org)
 #
 Name     : kinit
-Version  : 5.55.0
-Release  : 15
-URL      : https://download.kde.org/stable/frameworks/5.55/kinit-5.55.0.tar.xz
-Source0  : https://download.kde.org/stable/frameworks/5.55/kinit-5.55.0.tar.xz
-Source99 : https://download.kde.org/stable/frameworks/5.55/kinit-5.55.0.tar.xz.sig
-Summary  : No detailed summary available
+Version  : 5.56.0
+Release  : 16
+URL      : https://download.kde.org/stable/frameworks/5.56/kinit-5.56.0.tar.xz
+Source0  : https://download.kde.org/stable/frameworks/5.56/kinit-5.56.0.tar.xz
+Source99 : https://download.kde.org/stable/frameworks/5.56/kinit-5.56.0.tar.xz.sig
+Summary  : Process launcher to speed up launching KDE applications
 Group    : Development/Tools
 License  : LGPL-2.0 LGPL-2.1
 Requires: kinit-bin = %{version}-%{release}
@@ -43,7 +43,6 @@ Summary: bin components for the kinit package.
 Group: Binaries
 Requires: kinit-data = %{version}-%{release}
 Requires: kinit-license = %{version}-%{release}
-Requires: kinit-man = %{version}-%{release}
 
 %description bin
 bin components for the kinit package.
@@ -64,6 +63,7 @@ Requires: kinit-lib = %{version}-%{release}
 Requires: kinit-bin = %{version}-%{release}
 Requires: kinit-data = %{version}-%{release}
 Provides: kinit-devel = %{version}-%{release}
+Requires: kinit = %{version}-%{release}
 
 %description dev
 dev components for the kinit package.
@@ -104,22 +104,23 @@ man components for the kinit package.
 
 
 %prep
-%setup -q -n kinit-5.55.0
+%setup -q -n kinit-5.56.0
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1549762297
+export SOURCE_DATE_EPOCH=1552168502
 mkdir -p clr-build
 pushd clr-build
+export LDFLAGS="${LDFLAGS} -fno-lto"
 %cmake ..
-make  %{?_smp_mflags} VERBOSE=1
+make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1549762297
+export SOURCE_DATE_EPOCH=1552168502
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/kinit
 cp COPYING.LGPL-2 %{buildroot}/usr/share/package-licenses/kinit/COPYING.LGPL-2
