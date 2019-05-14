@@ -5,11 +5,11 @@
 # Source0 file verified with key 0x58D0EE648A48B3BB (faure@kde.org)
 #
 Name     : kinit
-Version  : 5.57.0
-Release  : 19
-URL      : https://download.kde.org/stable/frameworks/5.57/kinit-5.57.0.tar.xz
-Source0  : https://download.kde.org/stable/frameworks/5.57/kinit-5.57.0.tar.xz
-Source99 : https://download.kde.org/stable/frameworks/5.57/kinit-5.57.0.tar.xz.sig
+Version  : 5.58.0
+Release  : 20
+URL      : https://download.kde.org/stable/frameworks/5.58/kinit-5.58.0.tar.xz
+Source0  : https://download.kde.org/stable/frameworks/5.58/kinit-5.58.0.tar.xz
+Source99 : https://download.kde.org/stable/frameworks/5.58/kinit-5.58.0.tar.xz.sig
 Summary  : Process launcher to speed up launching KDE applications
 Group    : Development/Tools
 License  : LGPL-2.0 LGPL-2.1
@@ -22,20 +22,12 @@ Requires: kinit-man = %{version}-%{release}
 BuildRequires : buildreq-cmake
 BuildRequires : buildreq-kde
 BuildRequires : extra-cmake-modules pkgconfig(xcb) xcb-util-cursor-dev xcb-util-image-dev xcb-util-keysyms-dev xcb-util-renderutil-dev xcb-util-wm-dev xcb-util-dev
-BuildRequires : kbookmarks-dev
-BuildRequires : kcodecs-dev
 BuildRequires : kcompletion-dev
 BuildRequires : kcrash-dev
-BuildRequires : kdoctools
-BuildRequires : kdoctools-dev
-BuildRequires : ki18n-dev
 BuildRequires : kio-dev
 BuildRequires : kitemviews-dev
 BuildRequires : kjobwidgets-dev
 BuildRequires : kservice-dev
-BuildRequires : kwidgetsaddons-dev
-BuildRequires : kwindowsystem-dev
-BuildRequires : kxmlgui-dev
 BuildRequires : libX11-dev libICE-dev libSM-dev libXau-dev libXcomposite-dev libXcursor-dev libXdamage-dev libXdmcp-dev libXext-dev libXfixes-dev libXft-dev libXi-dev libXinerama-dev libXi-dev libXmu-dev libXpm-dev libXrandr-dev libXrender-dev libXres-dev libXScrnSaver-dev libXt-dev libXtst-dev libXv-dev libXxf86misc-dev libXxf86vm-dev
 BuildRequires : libcap-dev
 BuildRequires : qtbase-dev mesa-dev
@@ -71,6 +63,7 @@ Requires: kinit-lib = %{version}-%{release}
 Requires: kinit-bin = %{version}-%{release}
 Requires: kinit-data = %{version}-%{release}
 Provides: kinit-devel = %{version}-%{release}
+Requires: kinit = %{version}-%{release}
 Requires: kinit = %{version}-%{release}
 
 %description dev
@@ -112,14 +105,14 @@ man components for the kinit package.
 
 
 %prep
-%setup -q -n kinit-5.57.0
+%setup -q -n kinit-5.58.0
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1557018167
+export SOURCE_DATE_EPOCH=1557793585
 mkdir -p clr-build
 pushd clr-build
 export AR=gcc-ar
@@ -134,7 +127,7 @@ make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1557018167
+export SOURCE_DATE_EPOCH=1557793585
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/kinit
 cp COPYING.LGPL-2 %{buildroot}/usr/share/package-licenses/kinit/COPYING.LGPL-2
