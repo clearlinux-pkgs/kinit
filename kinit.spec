@@ -5,11 +5,11 @@
 # Source0 file verified with key 0x58D0EE648A48B3BB (faure@kde.org)
 #
 Name     : kinit
-Version  : 5.58.0
-Release  : 20
-URL      : https://download.kde.org/stable/frameworks/5.58/kinit-5.58.0.tar.xz
-Source0  : https://download.kde.org/stable/frameworks/5.58/kinit-5.58.0.tar.xz
-Source99 : https://download.kde.org/stable/frameworks/5.58/kinit-5.58.0.tar.xz.sig
+Version  : 5.59.0
+Release  : 21
+URL      : https://download.kde.org/stable/frameworks/5.59/kinit-5.59.0.tar.xz
+Source0  : https://download.kde.org/stable/frameworks/5.59/kinit-5.59.0.tar.xz
+Source99 : https://download.kde.org/stable/frameworks/5.59/kinit-5.59.0.tar.xz.sig
 Summary  : Process launcher to speed up launching KDE applications
 Group    : Development/Tools
 License  : LGPL-2.0 LGPL-2.1
@@ -105,14 +105,14 @@ man components for the kinit package.
 
 
 %prep
-%setup -q -n kinit-5.58.0
+%setup -q -n kinit-5.59.0
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1557793585
+export SOURCE_DATE_EPOCH=1560032876
 mkdir -p clr-build
 pushd clr-build
 export AR=gcc-ar
@@ -127,7 +127,7 @@ make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1557793585
+export SOURCE_DATE_EPOCH=1560032876
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/kinit
 cp COPYING.LGPL-2 %{buildroot}/usr/share/package-licenses/kinit/COPYING.LGPL-2
