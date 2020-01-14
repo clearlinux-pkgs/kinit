@@ -5,11 +5,11 @@
 # Source0 file verified with key 0x58D0EE648A48B3BB (faure@kde.org)
 #
 Name     : kinit
-Version  : 5.65.0
-Release  : 27
-URL      : https://download.kde.org/stable/frameworks/5.65/kinit-5.65.0.tar.xz
-Source0  : https://download.kde.org/stable/frameworks/5.65/kinit-5.65.0.tar.xz
-Source1  : https://download.kde.org/stable/frameworks/5.65/kinit-5.65.0.tar.xz.sig
+Version  : 5.66.0
+Release  : 28
+URL      : https://download.kde.org/stable/frameworks/5.66/kinit-5.66.0.tar.xz
+Source0  : https://download.kde.org/stable/frameworks/5.66/kinit-5.66.0.tar.xz
+Source1  : https://download.kde.org/stable/frameworks/5.66/kinit-5.66.0.tar.xz.sig
 Summary  : Process launcher to speed up launching KDE applications
 Group    : Development/Tools
 License  : LGPL-2.0 LGPL-2.1
@@ -104,15 +104,15 @@ man components for the kinit package.
 
 
 %prep
-%setup -q -n kinit-5.65.0
-cd %{_builddir}/kinit-5.65.0
+%setup -q -n kinit-5.66.0
+cd %{_builddir}/kinit-5.66.0
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1576541501
+export SOURCE_DATE_EPOCH=1578966182
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -128,11 +128,11 @@ make  %{?_smp_mflags}  VERBOSE=1
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1576541501
+export SOURCE_DATE_EPOCH=1578966182
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/kinit
-cp %{_builddir}/kinit-5.65.0/COPYING.LGPL-2 %{buildroot}/usr/share/package-licenses/kinit/ba8966e2473a9969bdcab3dc82274c817cfd98a1
-cp %{_builddir}/kinit-5.65.0/COPYING.LIB %{buildroot}/usr/share/package-licenses/kinit/9a1929f4700d2407c70b507b3b2aaf6226a9543c
+cp %{_builddir}/kinit-5.66.0/COPYING.LGPL-2 %{buildroot}/usr/share/package-licenses/kinit/ba8966e2473a9969bdcab3dc82274c817cfd98a1
+cp %{_builddir}/kinit-5.66.0/COPYING.LIB %{buildroot}/usr/share/package-licenses/kinit/9a1929f4700d2407c70b507b3b2aaf6226a9543c
 pushd clr-build
 %make_install
 popd
