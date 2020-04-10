@@ -6,7 +6,7 @@
 #
 Name     : kinit
 Version  : 5.68.0
-Release  : 30
+Release  : 31
 URL      : https://download.kde.org/stable/frameworks/5.68/kinit-5.68.0.tar.xz
 Source0  : https://download.kde.org/stable/frameworks/5.68/kinit-5.68.0.tar.xz
 Source1  : https://download.kde.org/stable/frameworks/5.68/kinit-5.68.0.tar.xz.sig
@@ -64,7 +64,6 @@ Requires: kinit-bin = %{version}-%{release}
 Requires: kinit-data = %{version}-%{release}
 Provides: kinit-devel = %{version}-%{release}
 Requires: kinit = %{version}-%{release}
-Requires: kinit = %{version}-%{release}
 
 %description dev
 dev components for the kinit package.
@@ -113,24 +112,23 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1584324041
+export SOURCE_DATE_EPOCH=1586534605
 mkdir -p clr-build
 pushd clr-build
-# -Werror is for werrorists
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
 export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FCFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
 export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
 %cmake ..
 make  %{?_smp_mflags}  VERBOSE=1
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1584324041
+export SOURCE_DATE_EPOCH=1586534605
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/kinit
 cp %{_builddir}/kinit-5.68.0/COPYING.LGPL-2 %{buildroot}/usr/share/package-licenses/kinit/ba8966e2473a9969bdcab3dc82274c817cfd98a1
