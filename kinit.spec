@@ -6,11 +6,11 @@
 # Source0 file verified with key 0x58D0EE648A48B3BB (faure@kde.org)
 #
 Name     : kinit
-Version  : 5.105.0
-Release  : 66
-URL      : https://download.kde.org/stable/frameworks/5.105/kinit-5.105.0.tar.xz
-Source0  : https://download.kde.org/stable/frameworks/5.105/kinit-5.105.0.tar.xz
-Source1  : https://download.kde.org/stable/frameworks/5.105/kinit-5.105.0.tar.xz.sig
+Version  : 5.106.0
+Release  : 67
+URL      : https://download.kde.org/stable/frameworks/5.106/kinit-5.106.0.tar.xz
+Source0  : https://download.kde.org/stable/frameworks/5.106/kinit-5.106.0.tar.xz
+Source1  : https://download.kde.org/stable/frameworks/5.106/kinit-5.106.0.tar.xz.sig
 Summary  : Process launcher to speed up launching KDE applications
 Group    : Development/Tools
 License  : BSD-3-Clause CC0-1.0 LGPL-2.0 LGPL-2.1 LGPL-3.0
@@ -110,31 +110,48 @@ man components for the kinit package.
 
 
 %prep
-%setup -q -n kinit-5.105.0
-cd %{_builddir}/kinit-5.105.0
+%setup -q -n kinit-5.106.0
+cd %{_builddir}/kinit-5.106.0
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1681752278
+export SOURCE_DATE_EPOCH=1684879499
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-export CFLAGS="$CFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
-export FCFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
-export FFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
-export CXXFLAGS="$CXXFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
+export CFLAGS="$CFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+export FCFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+export FFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+export CXXFLAGS="$CXXFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+%cmake ..
+make  %{?_smp_mflags}
+popd
+mkdir -p clr-build-avx2
+pushd clr-build-avx2
+export GCC_IGNORE_WERROR=1
+export AR=gcc-ar
+export RANLIB=gcc-ranlib
+export NM=gcc-nm
+export CFLAGS="$CFLAGS -O3 -Wl,-z,x86-64-v3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd -march=x86-64-v3 "
+export FCFLAGS="$FFLAGS -O3 -Wl,-z,x86-64-v3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd -march=x86-64-v3 "
+export FFLAGS="$FFLAGS -O3 -Wl,-z,x86-64-v3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd -march=x86-64-v3 "
+export CXXFLAGS="$CXXFLAGS -O3 -Wl,-z,x86-64-v3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd -march=x86-64-v3 "
+export CFLAGS="$CFLAGS -march=x86-64-v3 -m64 -Wl,-z,x86-64-v3"
+export CXXFLAGS="$CXXFLAGS -march=x86-64-v3 -m64 -Wl,-z,x86-64-v3"
+export FFLAGS="$FFLAGS -march=x86-64-v3 -m64 -Wl,-z,x86-64-v3"
+export FCFLAGS="$FCFLAGS -march=x86-64-v3 -m64 -Wl,-z,x86-64-v3"
 %cmake ..
 make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1681752278
+export SOURCE_DATE_EPOCH=1684879499
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/kinit
 cp %{_builddir}/kinit-%{version}/LICENSES/BSD-3-Clause.txt %{buildroot}/usr/share/package-licenses/kinit/9950d3fdce1cff1f71212fb5abd31453c6ee2f8c || :
@@ -144,19 +161,31 @@ cp %{_builddir}/kinit-%{version}/LICENSES/LGPL-2.1-only.txt %{buildroot}/usr/sha
 cp %{_builddir}/kinit-%{version}/LICENSES/LGPL-3.0-only.txt %{buildroot}/usr/share/package-licenses/kinit/757b86330df80f81143d5916b3e92b4bcb1b1890 || :
 cp %{_builddir}/kinit-%{version}/LICENSES/LicenseRef-KDE-Accepted-LGPL.txt %{buildroot}/usr/share/package-licenses/kinit/e458941548e0864907e654fa2e192844ae90fc32 || :
 cp %{_builddir}/kinit-%{version}/LICENSES/LicenseRef-KDE-Accepted-LGPL.txt %{buildroot}/usr/share/package-licenses/kinit/e458941548e0864907e654fa2e192844ae90fc32 || :
+pushd clr-build-avx2
+%make_install_v3  || :
+popd
 pushd clr-build
 %make_install
 popd
 %find_lang kinit5
+/usr/bin/elf-move.py avx2 %{buildroot}-v3 %{buildroot} %{buildroot}/usr/share/clear/filemap/filemap-%{name}
 
 %files
 %defattr(-,root,root,-)
+/V3/usr/lib64/libexec/kf5/klauncher
+/V3/usr/lib64/libexec/kf5/start_kdeinit
+/V3/usr/lib64/libexec/kf5/start_kdeinit_wrapper
 /usr/lib64/libexec/kf5/klauncher
 /usr/lib64/libexec/kf5/start_kdeinit
 /usr/lib64/libexec/kf5/start_kdeinit_wrapper
 
 %files bin
 %defattr(-,root,root,-)
+/V3/usr/bin/kdeinit5
+/V3/usr/bin/kdeinit5_shutdown
+/V3/usr/bin/kdeinit5_wrapper
+/V3/usr/bin/kshell5
+/V3/usr/bin/kwrapper5
 /usr/bin/kdeinit5
 /usr/bin/kdeinit5_shutdown
 /usr/bin/kdeinit5_wrapper
@@ -178,6 +207,7 @@ popd
 
 %files lib
 %defattr(-,root,root,-)
+/V3/usr/lib64/libkdeinit5_klauncher.so
 /usr/lib64/libkdeinit5_klauncher.so
 
 %files license
